@@ -1,175 +1,282 @@
-/* ===== FONDO GENERAL ===== */
+/* =============================================
+   REGISTRO DE DRAGONES - ESTILOS ÉPICOS
+   Inspirado en la estética de Mundo Dragón
+   Fuego, runas y pergaminos ancestrales
+   ============================================= */
+
+/* ----- FONDO PRINCIPAL (como landing page) ----- */
 body {
-    background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #2b0f0f);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at 10% 20%, #1a0b0b, #0d0505);
+    font-family: 'Georgia', 'Times New Roman', 'Segoe UI', serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
-    color: #f5f5f5;
+    padding: 20px;
+    color: #f0e2c5;
+    /* Textura sutil de pergamino antiguo */
+    background-image: 
+        repeating-linear-gradient(45deg, rgba(255, 77, 0, 0.03) 0px, rgba(255, 77, 0, 0.03) 2px, transparent 2px, transparent 8px),
+        radial-gradient(circle at 20% 30%, rgba(255, 100, 0, 0.08) 0%, transparent 50%);
 }
 
-/* CONTENEDOR */
+/* ----- CONTENEDOR PRINCIPAL ----- */
 .container {
-    max-width: 700px;
+    max-width: 800px;
     width: 100%;
+    margin: 0 auto;
 }
 
-/* TARJETA */
+/* ----- TARJETA MÁGICA (estilo pergamino de dragón) ----- */
 .formulario-card {
-    background: #1e1e1e;
-    border: 2px solid #ff4d00;
-    border-radius: 20px;
+    background: rgba(20, 10, 8, 0.85);
+    backdrop-filter: blur(3px);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #ff4d00, #7a2a00, #ff4d00) 1;
+    border-radius: 24px;
     padding: 2rem;
-    box-shadow: 0 0 20px rgba(255, 77, 0, 0.3);
-    transition: transform 0.3s;
+    box-shadow: 
+        0 0 30px rgba(255, 77, 0, 0.2),
+        inset 0 0 20px rgba(255, 77, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .formulario-card:hover {
-    transform: scale(1.01);
+    transform: translateY(-5px);
+    box-shadow: 0 0 45px rgba(255, 77, 0, 0.3);
 }
 
-/* TÍTULO */
+/* ----- TÍTULO ÉPICO (con runas y fuego) ----- */
 .formulario-card h2 {
     text-align: center;
-    color: #ff4d00;
-    margin-bottom: 1.5rem;
+    color: #ff8c42;
+    font-size: 1.8rem;
+    margin-bottom: 1.8rem;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    text-shadow: 3px 3px 0px #3a1a00;
+    letter-spacing: 3px;
     border-bottom: 2px solid #ff4d00;
     display: inline-block;
-    padding-bottom: 5px;
+    width: auto;
+    padding-bottom: 10px;
+    background: linear-gradient(135deg, #ffaa66, #ff4d00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: none;
 }
 
-/* CAMPOS */
+/* Si quieres color sólido en lugar de gradiente, usa esta línea en vez de la anterior */
+/* .formulario-card h2 { color: #ff8c42; text-shadow: 2px 2px 0 #3a1a00; } */
+
+/* ----- CAMPOS DEL FORMULARIO ----- */
 .campo {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
 }
 
 .campo label {
     display: block;
-    margin-bottom: 5px;
     font-weight: bold;
+    margin-bottom: 8px;
     color: #ffb347;
+    font-family: 'Georgia', serif;
+    letter-spacing: 1px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
 }
 
-/* INPUTS */
+/* Iconos decorativos en los labels (opcional, se añaden en HTML) */
+.campo label::before {
+    content: "✦ ";
+    color: #ff4d00;
+    font-size: 0.9rem;
+}
+
+/* ----- INPUTS ESTILO PERGAMINO OSCURO ----- */
 .campo input,
 .campo select,
 .campo textarea {
     width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 2px solid #333;
-    background: #2a2a2a;
-    color: white;
+    padding: 12px 15px;
+    background: #2a1a12;
+    border: 1px solid #b87c4f;
+    border-radius: 12px;
+    color: #fce6cf;
     font-size: 1rem;
+    font-family: 'Georgia', 'Times New Roman', monospace;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
-/* FOCUS */
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus {
     outline: none;
     border-color: #ff4d00;
-    box-shadow: 0 0 10px rgba(255, 77, 0, 0.5);
+    box-shadow: 0 0 12px rgba(255, 77, 0, 0.4);
+    background: #331e14;
 }
 
-/* BOTONES */
+.campo textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Placeholder con estilo */
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #8a6a4a;
+    font-style: italic;
+}
+
+/* ----- BOTONES CON FUEGO LEGENDARIO ----- */
 .botones {
     display: flex;
+    gap: 1.2rem;
     justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .botones button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 50px;
+    padding: 10px 28px;
+    font-size: 1rem;
     font-weight: bold;
+    border: none;
+    border-radius: 40px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    font-family: 'Georgia', serif;
+    letter-spacing: 1px;
 }
 
-/* BOTÓN ENVIAR */
+/* Botón Registrar (estilo fuego) */
 #btnEnviar {
-    background: #ff4d00;
+    background: linear-gradient(45deg, #ff4d00, #b82b00);
     color: white;
+    box-shadow: 0 4px 12px rgba(255, 77, 0, 0.3);
+    border: 1px solid rgba(255, 150, 50, 0.6);
 }
 
 #btnEnviar:hover {
-    background: #cc3d00;
-    transform: translateY(-2px);
+    background: linear-gradient(45deg, #ff6622, #cc3300);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 77, 0, 0.5);
 }
 
-/* BOTÓN LIMPIAR */
+/* Botón Limpiar (estilo acero sombrío) */
 #btnLimpiar {
-    background: #555;
-    color: white;
+    background: linear-gradient(45deg, #3a2a20, #2a1a10);
+    color: #d4b88c;
+    border: 1px solid #7a5a3a;
 }
 
 #btnLimpiar:hover {
-    background: #777;
+    background: linear-gradient(45deg, #4a3a2a, #3a2a1a);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* MENSAJE ERROR */
+/* ----- MENSAJE DE ERROR ÉPICO ----- */
 #mensajeError {
     text-align: center;
-    margin-top: 10px;
-    color: #ff6b6b;
+    margin-top: 20px;
+    padding: 10px;
     font-weight: bold;
+    color: #ff7b5c;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    font-family: monospace;
+    letter-spacing: 0.5px;
 }
 
-/* LISTA */
+/* ----- LISTA DE DRAGONES (como pergamino de registro) ----- */
 .lista {
-    margin-top: 20px;
-    background: #1e1e1e;
-    padding: 1rem;
-    border-radius: 15px;
-    border: 1px solid #444;
+    margin-top: 30px;
+    background: rgba(10, 5, 3, 0.7);
+    backdrop-filter: blur(2px);
+    padding: 1.2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 77, 0, 0.3);
 }
 
 .lista h3 {
     text-align: center;
     color: #ffb347;
+    margin-bottom: 1rem;
+    font-family: 'Georgia', serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
 }
 
-/* ITEMS */
+/* Cada dragón registrado como una carta */
 #listaDragones li {
-    background: #2a2a2a;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 10px;
+    background: rgba(30, 18, 12, 0.8);
+    margin: 12px 0;
+    padding: 12px 15px;
+    border-radius: 16px;
     border-left: 5px solid #ff4d00;
+    list-style: none;
+    transition: all 0.2s ease;
 }
 
-/* BOTÓN ELIMINAR */
+#listaDragones li:hover {
+    background: rgba(40, 25, 18, 0.9);
+    transform: translateX(5px);
+}
+
+/* Textos dentro de cada dragón */
+#listaDragones li p {
+    margin: 6px 0;
+    color: #f0ddc5;
+    font-size: 0.9rem;
+}
+
+/* Botón eliminar (estigma de banición) */
 .btnEliminar {
-    margin-top: 5px;
-    padding: 5px 10px;
-    background: #ff1a1a;
+    margin-top: 8px;
+    padding: 6px 14px;
+    background: #8b2a1a;
     border: none;
-    border-radius: 8px;
-    color: white;
+    border-radius: 20px;
+    color: #ffe0b5;
     cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+    font-family: monospace;
 }
 
 .btnEliminar:hover {
-    background: #cc0000;
+    background: #c04020;
+    transform: scale(1.02);
+    box-shadow: 0 0 8px #ff4d00;
 }
 
-/* RESPONSIVE */
-@media (max-width: 480px) {
-    .formulario-card {
-        padding: 1rem;
-    }
+/* Mensaje cuando no hay dragones */
+#listaDragones li:first-child:only-child {
+    text-align: center;
+    font-style: italic;
+    color: #b88866;
+    border-left-color: #665533;
+}
 
+/* ----- RESPONSIVE (como tu landing) ----- */
+@media (max-width: 600px) {
+    .formulario-card {
+        padding: 1.2rem;
+    }
+    
     .botones {
         flex-direction: column;
+        gap: 0.8rem;
     }
-
+    
     .botones button {
         width: 100%;
+    }
+    
+    .formulario-card h2 {
+        font-size: 1.3rem;
     }
 }
