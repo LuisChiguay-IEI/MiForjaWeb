@@ -3,55 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Dragones</title>
+    <title>Mundo Dragón · Tienda de Tesoros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
+    <!-- ==================== AMBIENTACIÓN COMPLETA ==================== -->
+    
+    <div class="logo">
+        <img src="https://i.pinimg.com/736x/f4/d4/7a/f4d47adb844404ac35bea7800e7344d3.jpg" alt="Logo Dragón">
+    </div>
+
+    <div class="particulas">
+        <span class="particula"></span><span class="particula"></span><span class="particula"></span>
+        <span class="particula"></span><span class="particula"></span><span class="particula"></span>
+        <span class="particula"></span><span class="particula"></span>
+    </div>
+
+    <div class="hojas-flotantes">
+        <span class="hoja-float"></span><span class="hoja-float"></span><span class="hoja-float"></span>
+        <span class="hoja-float"></span><span class="hoja-float"></span><span class="hoja-float"></span>
+        <span class="hoja-float"></span><span class="hoja-float"></span>
+    </div>
+
+    <div class="alas-dragon">
+        <div class="ala"></div>
+        <div class="ala derecha"></div>
+    </div>
+
+    <div class="brasas">
+        <span class="brasa"></span><span class="brasa"></span><span class="brasa"></span><span class="brasa"></span>
+        <span class="brasa"></span><span class="brasa"></span><span class="brasa"></span><span class="brasa"></span>
+        <span class="brasa"></span><span class="brasa"></span><span class="brasa"></span><span class="brasa"></span>
+        <span class="brasa"></span><span class="brasa"></span><span class="brasa"></span>
+    </div>
+
+
+    <!-- DRAGÓN GRANDE ARRIBA IZQUIERDA -->
+    <div class="dragon-ascii dragon-superior">
+        <pre>
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢤⡄⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣠⣤⣤⣤⣤⣤⣤⣤⣤⣀⣀⣼⣻⡄⠀⠀⠀⠀⠀⠀⡄⠀⢀⣸⣿⡆⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⣤⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠳⣦⣄⡀⣀⣴⣿⣾⣿⣿⠟⠃⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⣿⣉⣭⣴⣾⣿⣿⠿⣻⣿⣿⡏⢀⣠⣼⣿⠹⣿⣿⣿⡻⡟⠁⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣿⣿⣭⣿⣾⣿⣿⣿⣿⣿⡟⠛⠁⣠⣾⣿⣿⣿⣴⣿⣿⣿⣿⣇⠙⢿⣿⣿⣬⣦⠀⠀⠀
+⠀⠀⠀⢀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⣩⣵⣾⣿⣿⣿⣿⣿⣿⡿⣿⠏⠉⠀⣠⠞⣻⣿⣿⠇⣿⣿⣿⣿⣿⣿⣿⣿⣾⣷⣿⣿⣿⡇⠀⠀
+⠀⢀⡾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣽⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⡁⠈⠀⠀⣠⢞⣵⣾⣿⣿⠋⢰⣿⣿⣿⣿⣿⣟⣩⣿⣿⣯⣟⣿⣿⣷⡄⠀
+⢠⣯⡾⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⠋⠖⠀⠀⢀⣤⠞⢁⣞⣻⣿⣿⠁⠀⢸⣿⣿⣿⣿⣿⣿⣯⣴⣟⣿⢿⣿⣿⣿⣿⠀
+⠛⠁⠀⠀⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠀⠂⠀⠀⠀⢀⡴⠋⠁⠀⠈⠙⠛⢿⣿⣷⣄⢸⣿⣿⣿⣿⣿⣿⣿⣏⡈⣧⠀⠈⠙⣿⡏⠀
+⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠐⠀⠀⠀⢀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣭⣉⢹⡄⠀⠀⠈⠀⠀
+⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠲⣆⠀⠀⠀⣠⠾⢋⣀⣤⠤⣤⣀⡀⠀⠀⠀⠀⠀⠉⢿⣿⣿⣿⣿⣿⣿⡿⢻⣿⣄⡀⣱⡀⠀⠀⠀⠀
+⠀⠀⣰⣯⣾⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⣸⠟⣦⡾⠗⠋⠁⠀⠀⠀⡀⠀⣽⣷⣄⠀⠀⣀⣤⣬⣿⣿⣿⣿⣿⣿⣿⣿⣿⣀⠀⢻⢧⠀⠀⠀⠀
+⠀⢰⡿⠋⠉⢻⣿⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀⣼⡵⠊⠉⠀⠀⣠⣀⣰⣶⣾⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⡟⠻⣧⣿⡉⠙⢳⡏⢈⡆⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⣀⣠⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣠⣿⣿⠛⠢⣼⠟⣩⠃⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⢠⣤⣼⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⣹⣿⣿⣿⣿⣿⣿⣿⣿⣥⣾⡟⠙⠻⣷⣴⣿⣠⡞⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣸⣿⣿⠃⠀⠀⠀⠀⠀⢠⣤⣾⣿⣿⣿⣿⣿⢿⣿⣯⣿⣿⣿⣿⡿⠀⣰⣿⣿⠛⣿⣿⢻⣿⣿⣿⣴⣿⣾⣤⣤⡼⣿⣿⠋⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣏⣾⠃⠀⠀⠀⠀⠠⣤⣾⣿⣿⣿⣿⣿⠿⠛⠋⢉⣽⣦⣼⣿⣿⣁⣰⣿⣯⣿⣷⣿⣿⣿⣿⡿⠋⣿⡽⠶⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣸⡿⠁⠀⠀⠀⠀⠀⣤⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠈⠻⣷⡆⢹⡇⠀⠈⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⣿⣿⡿⠋⠙⠋⠙⢿⣿⣿⡀⠀⠀⠀⠀⠀⠹⣿⣜⣷⣀⠀⠙⢿⣿⣿⣶⣤⣄⡀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⡏⢀⣀⣀⣀⣀⣀⣼⣿⣿⣧⣀⣀⣀⣀⣀⣻⣿⣿⣷⢾⣶⣤⣤⣠⣿⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣦⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣧⠀⠛⠿⠿⠿⢿⣿⣿⢿⣿⣿⡿⠿⠿⢿⡟⠛⠿⠛⠛⠛⠟⠟⠛⠿⠿⠛⠟⠛⠻⠟⠟⠛⠋⠟⠻⠿⠿⠁
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣷⣄⣀⣀⣀⣤⣴⣶⣶⣶⣾⣷⣾⠶⣤⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⡛⣛⣉⣉⣀⣀⣀⣘⣛⣉⣉⠙⠃⠀
+        </pre>
+    </div>
+
+    <!-- DRAGÓN ORIGINAL (ABAJO DERECHA) -->
+    <div class="dragon-ascii dragon-original">
+        <pre>
+⠈⢿⣿⣿⣧⡁⣻⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡿⠇⠀⠀
+⠀⠘⣿⣏⣿⣧⢻⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠈⠓⠦⣤⣤⠤⠶⢶⣒⣒⣒⡲⠶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⡿⠀⡎⠀
+⠀⠀⠸⡿⡊⣾⣧⠀⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠙⠲⣤⣤⣤⣴⡶⠿⠟⠛⠛⣛⠿⢿⣿⣶⣽⣿⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣤⠀⢸⠃⠀
+⠀⠀⠀⢹⣤⠰⣿⣆⠀⠀⠈⢯⣵⣶⢤⣄⠀⠀⠀⠐⢆⡀⠀⠀⠀⠀⢀⣀⣀⣀⣽⣭⣛⣿⣿⣿⣿⣿⣿⣿⢷⣄⡀⠀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠛⠋⢠⡏⠀⠀
+⠀⠀⠀⠀⢫⢁⢸⡿⣆⠀⠪⣿⢿⣻⠉⠉⠀⠀⠀⠀⠠⢬⣉⣉⡉⢉⣤⡴⣿⡡⢷⠋⡟⡟⣟⣿⡿⠇⠉⠉⠀⠉⠈⠙⣫⡹⠛⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣷⠀⡼⠀⠀⠀
+⠀⠀⠀⠀⠀⢧⢀⢾⠿⣄⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⢉⣿⡿⡞⣱⠵⠟⠋⡉⢉⠹⣟⣄⣳⣂⣉⣩⣍⣕⣛⣛⡿⣭⡷⠃⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⠇⣸⠃⠀⠀⠀
+⠀⠀⠀⠀⠀⠈⢆⢂⣶⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡿⢛⡸⠋⡁⣤⣤⣴⣿⣾⡿⠛⢿⠿⠟⠛⠉⠉⠉⠉⠉⠛⠛⠃⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⠏⢠⠇⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠘⣎⣟⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⡧⠊⢄⣤⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⢏⣞⡟⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠘⣽⡻⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡿⢁⣰⣿⢿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⡟⢁⡞⢸⡁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠸⣷⡹⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⢸⡇⢸⡟⢁⢾⣿⣿⣿⣿⣿⣿⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⢿⢻⣿⢟⡥⠚⣉⠀⠀⠳⣄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⡇⠱⢌⠻⣿⣿⣦⡀⠀⠀⠀⠀⠀⢸⡇⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⢾⡏⣉⠷⠊⣡⠽⠚⠉⠀⠉⠙⠲⢌⡳⣄⡀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⡾⣠⠖⠀⠲⣝⢿⣉⡿⢶⣄⠀⠀⠀⠘⡇⢸⢿⡋⠸⡿⣿⣿⣿⣿⣿⣯⣽⣄⡀⠀⠀⢀⣀⣠⣴⡾⠻⣅⠴⠋⣁⠴⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠲⢝⡦
+⠀⠀⠀⠀⠀⠀⠀⡼⡴⠁⠀⠀⠀⠀⠑⢝⢷⣯⢿⣷⣤⣀⢀⡇⠀⠉⠀⠀⢧⠞⢹⣿⡿⣿⣿⣿⣶⣶⣿⣿⣿⣿⣿⣿⠷⢚⣡⠴⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙
+⠀⠀⠀⠀⠀⢀⣼⡞⠀⠀⠀⠀⠀⠀⠀⠀⠑⢽⣾⣿⣿⣿⣿⡇⠀⠀⠀⠀⠈⣄⡞⠙⣀⣼⠛⣿⣿⣿⣿⣿⣿⡿⠛⣡⠖⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣾⠎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⣿⣿⣿⠀⠀⠀⠀⠀⠀⠈⢆⣸⠁⢳⣰⣿⠓⠴⣭⣿⣯⣦⡞⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠
+⠀⠀⠀⢀⣾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⣻⡇⠀⠀⠀⠀⠀⠀⠀⠀⠙⢄⣿⠧⢤⣉⣉⣽⣇⢺⣿⣿⣿⣿⣿⣷⣦⣤⣄⣀⣀⣀⣀⣤⣤⣤⣤⣶⣶⣿⣿⠿⠘⢛
+⠀⠀⢠⡾⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣏⣩⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠤⠀⠠⠴⢺⣿⣿⣿⣧⡽⠚⠛⠛⠛⠛⠛⠛⠻⠿⠿⠿⠛⠚⠛⣉⣉⠤⠴⠒⠊⠉
+⣟⣳⠟⢳⡶⣶⡤⣤⣤⠤⡤⢤⡤⣤⠤⣶⣶⣿⣿⣍⣽⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⢷⡤⠶⠒⣉⣷⣿⣿⣿⣿⠏⠉⠉⠉⠉⠁⠒⠲⠦⣀⠀⠀⡴⠋⠉⠀⠀⠀⠀⠀⠀
+⠈⠉⠉⠉⠑⠚⠓⠻⠭⢍⣉⡉⠉⠉⢉⡩⠷⠚⢿⣭⡽⢇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠆⠹⣒⣉⡡⡞⢯⣿⣿⡟⢧⡀⠀⠀⠀⠀⠀⠀⠀⠈⣦⢸⠁⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⢰⠋⠀⠀⠀⠘⢷⣶⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⡼⢞⣚⣩⢷⣻⣷⠈⢳⡀⠀⠀⠀⠀⠀⠀⠀⠘⡸⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡟⠀⠀⠀⠀⠀⣸⣿⣯⢷⡄⠸⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣨⣟⡩⢭⣓⢾⡧⣿⡇⠀⢻⣦⣤⣀⠀⠀⠀⠀⠀⣧⡇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⣠⠔⠋⠀⢿⢒⡳⣿⣆⠘⠢⡀⠀⠀⠀⠀⠀⠀⣠⣾⠿⢷⡪⣵⣮⡽⣟⣿⡇⠀⠀⢻⣿⣿⡟⠲⢤⡀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡴⠛⠁⠀⠀⠀⣼⢩⡯⢹⣿⡷⣄⠙⠆⠀⠀⢀⣠⣶⡿⣛⠯⣳⢭⢷⢻⣵⣿⠿⠃⠀⠀⠀⢿⢿⣷⣄⠀⠈⠓⠾⣿⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠼⠏⠀⠀⠀⠀⠀⣸⠯⣟⣁⢲⡿⣿⠄⠙⠦⣀⣾⣿⣿⣿⣽⣮⣷⣿⣿⠾⠟⠋⠁⠀⠀⠀⠀⠀⠈⢯⢿⣝⡂⠀⠀⠀⠽⠛⠶⣄⣀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠊⠁⠀⠀⠀⠀⠀⠀⢠⣟⣽⣗⣂⣞⣼⠇⠀⠀⢀⣾⣿⣿⣿⣿⡿⠛⠋⠭⣀⠀⢠⠆⠀⠀⠀⠀⠀⠀⠀⠘⣿⢿⡛⠒⠀⠀⠀⠀⠀⠀⠉⠓⠦⣄⡀
+⠀⠀⠀⠀⠀⠀⣠⠖⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣷⣿⡒⣾⣿⠃⢀⣤⣤⣿⣿⣿⣿⣿⠃⠉⠙⠒⢤⡈⠙⢣⡀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣯⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉
+⠀⠀⠀⢀⡴⠋⡴⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⢼⣿⠇⠀⢸⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠈⠳⣄⠘⢦⡀⠀⠀⠀⠀⢀⡴⠟⠛⢿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⡠⠞⡁⢀⠀⢷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣯⣿⡏⠀⣶⣿⠻⠸⣇⣿⢿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠈⢳⡄⢑⣄⠀⠀⣰⡟⠋⠉⠓⠦⣽⣿⣯⠃⠀⠀⠀⠀⠀⠀⠀⠀
+⠂⠀⠀⣀⡇⢰⢙⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⠁⠀⠙⠿⠆⠀⠈⠁⠒⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣏⣈⣦⢰⣿⠖⠀⠐⠲⠤⣽⣿⣿⣤⣄⠀⠀⠀⠀⠀⠀⠈
+⠀⠀⠀⠹⢀⢺⠀⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣷⣿⣤⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣿⣧⡀⠀⢸⡴⠒⠒⠲⢶⣿⣿⣿⣿⠉⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⠀⠹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⡿⠉⢻⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣾⣿⣿⣿⣿⣷⡀⠀⢷⠒⢒⣲⣾⣻⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠘⠀⠀⢃⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⣿⡿⠛⠀⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠾⣭⣉⠉⢻⢿⣿⣿⣷⡀⠸⣯⡥⢔⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠊⢇⠀⢺⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⣵⡴⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣟⣆⠀⠀⢹⡙⠦⣼⣿⡿⣇⠀⠈⠙⠛⠉⠀⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀
+⣠⣤⣶⣾⣿⣷⣾⣦⣦⣤⣀⡀⠀⠀⠀⠀⠉⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠃⠉⠉⡏⠃⣾⡿⢋⣴⣻⡆⠀⠀⠀⠀⢪⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀
+⡿⠿⠛⠛⠛⢿⠿⣽⣍⡟⣿⣿⣶⣎⣀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣷⠓⠒⠲⡽⢾⣿⣿⣿⣿⠟⣧⠀⠀⠀⠀⣺⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠸⡀⢹⡉⠻⢿⣼⡿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣶⠒⠒⣗⣿⣿⣿⣿⡏⠀⢸⠀⠀⡀⠀⠘⠿⣿⣿⣿⠟⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠁⠀⠁⠀⠀⠙⢷⣿⢹⣿⣿⣿⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⣿⢟⣿⣿⡿⠀⠀⢸⣧⡀⣧⠀⣠⣴⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⡷⢿⢿⣿⣧⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⣠⣾⣿⣿⡇⠀⠀⢸⣟⣮⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢻⣾⡛⣏⣻⢿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⡿⠃⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣯⣹⣤⡟⢻⣿⣷⣴⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⠿⠿⠏⠃⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣧⡿⢾⣉⠟⠿⣿⣿⣶⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣰⣿⡿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀
+        </pre>
+    </div>
+
+    <!-- ==================== FORMULARIO PRINCIPAL ==================== -->
+
     <div class="container">
         <div class="formulario-card">
-            <h2>🐉 Registro de Dragones</h2>
+            <h2>𓆩 ༺✧༻  Tienda De Tesoros  ༺✧༻ 𓆪</h2>
 
-            <form id="formulario">
+            <form id="formularioVentas">
                 <div class="campo">
-                    <label for="nombre">Nombre del Dragón:</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Ej: Smaug">
+                    <label for="nombre">🐉 Nombre del Guardián:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre en el reino" required>
                 </div>
 
                 <div class="campo">
-                    <label for="correo">Correo del Guardián:</label>
-                    <input type="email" id="correo" name="correo" placeholder="guardian@reino.com">
+                    <label for="correo">✉️ Correo del Guardián:</label>
+                    <input type="email" id="correo" name="correo" placeholder="guardian@reino.com" required>
                 </div>
 
                 <div class="campo">
-                    <label for="tipo">Tipo de Dragón:</label>
-                    <select id="tipo" name="tipo">
-                        <option value="Fuego">🔥 Dragón de Fuego</option>
-                        <option value="Hielo">❄️ Dragón de Hielo</option>
-                        <option value="Celestial">✨ Dragón Celestial</option>
-                        <option value="Sombra">🌑 Dragón de Sombra</option>
-                        <option value="Ancestral">👑 Dragón Ancestral</option>
-                    </select>
+                    <label for="producto">🔥 Producto a Adquirir:</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="text" id="producto" name="producto" readonly placeholder="Ningún producto seleccionado" style="flex: 1; background: rgba(0,0,0,0.4); cursor: pointer;">
+                        <button type="button" id="btnAbrirCarrusel" class="btn-secundario" style="padding: 10px 20px;">📦 Elegir producto</button>
+                    </div>
                 </div>
 
                 <div class="campo">
-                    <label for="mensaje">Descripción del Dragón:</label>
-                    <textarea id="mensaje" name="mensaje" rows="5" placeholder="Describe sus habilidades, temperamento o historia..."></textarea>
+                    <label for="precio">💰 Precio Unitario:</label>
+                    <input type="text" id="precio" name="precio" readonly style="background: rgba(0,0,0,0.4);">
+                </div>
+
+                <div class="campo">
+                    <label for="cantidad">🔢 Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" value="1" min="1" required>
+                </div>
+
+                <div class="campo">
+                    <label for="total">💎 Total:</label>
+                    <input type="text" id="total" name="total" readonly style="background: rgba(0,0,0,0.4);">
                 </div>
 
                 <div class="botones">
-                    <button type="submit" id="btnEnviar">Registrar</button>
-                    <button type="button" id="btnLimpiar">Limpiar</button>
+                    <button type="submit" id="btnEnviar">✨ Realizar Pedido ✨</button>
+                    <button type="button" id="btnLimpiarFormulario">🧹 Limpiar Campos</button>
                 </div>
             </form>
 
-            <p id="mensajeError"></p>
+            <div id="mensajeError" class="mensaje-epico"></div>
         </div>
 
-        <div class="lista">
-            <h3>📜 Dragones Registrados</h3>
-            <ul id="listaDragones"></ul>
+        <div class="lista pedidos-lista">
+            <h3>📜 Pedidos Realizados al Reino</h3>
+            <ul id="listaPedidos"></ul>
+            <div class="total-pedidos" id="totalPedidos"></div>
         </div>
+    </div>
+
+    <!-- Botón flotante volver arriba -->
+    <button id="btnArriba" aria-label="Volver arriba">↑</button>
+
+    <!-- ==================== CARROUSEL FLOTANTE ==================== -->
+    <div id="carruselFlotante" class="carrusel-flotante">
+        <div class="carrusel-header">
+            <h3>𓆩 ༺✧༻  Elige tu tesoro dracónico  ༺✧༻ 𓆪</h3>
+            <button id="btnCerrarCarrusel" class="btn-cerrar">✖</button>
+        </div>
+        <div class="carrusel-container">
+            <div class="carrusel-pista" id="carruselPista"></div>
+            <button class="carrusel-prev">‹</button>
+            <button class="carrusel-next">›</button>
+        </div>
+        <div class="carrusel-indicadores" id="carruselIndicadores"></div>
     </div>
 
     <script src="script.js"></script>
