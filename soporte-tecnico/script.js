@@ -8,6 +8,7 @@
 const pedidos = [];
 
 // Referencias al DOM
+const container = document.querySelector('.container');
 const inputNombre = document.getElementById('nombre');
 const inputCorreo = document.getElementById('correo');
 const inputProducto = document.getElementById('producto');
@@ -80,23 +81,23 @@ function irASlide(indice) {
     actualizarIndicadores();
 }
 
-// Funciones para mostrar/ocultar el carrusel con transición izquierda
 function abrirCarrusel() {
-    carruselFlotante.style.display = 'block';  // Asegura que sea visible
-    void carruselFlotante.offsetWidth;         // Forzar reflow para la transición
+    carruselFlotante.style.display = 'block';
+    void carruselFlotante.offsetWidth;
     carruselFlotante.classList.add('abierto');
+    container.classList.add('desplazado');
     indiceCarrusel = 0;
     irASlide(0);
 }
 
 function cerrarCarrusel() {
     carruselFlotante.classList.remove('abierto');
-    // Ocultar completamente después de que termine la animación
+    container.classList.remove('desplazado');
     setTimeout(() => {
         if (!carruselFlotante.classList.contains('abierto')) {
             carruselFlotante.style.display = 'none';
         }
-    }, 400); // mismo tiempo que la transición CSS
+    }, 400);
 }
 
 // Eventos del carrusel
