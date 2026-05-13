@@ -1,282 +1,804 @@
 /* =============================================
-   REGISTRO DE DRAGONES - ESTILOS ÉPICOS
-   Inspirado en la estética de Mundo Dragón
-   Fuego, runas y pergaminos ancestrales
+   REGISTRO DE DRAGONES - ESTILO MUNDO DRAGÓN
+   Incluye: fondo épico, partículas, hojas, alas, brasas, runas brillantes, dos dragones ASCII
    ============================================= */
 
-/* ----- FONDO PRINCIPAL (como landing page) ----- */
+:root {
+    --dorado: #f6d89a;
+    --dorado-oscuro: #d4a85a;
+    --rojo-fuego: #b63a1b;
+    --naranja-fuego: #ff7a2f;
+    --lava: #ff5a1f;
+    --lava-suave: #ffb36b;
+    --ceniza: #0f0908;
+    --ceniza-2: #1a110f;
+    --glow-fuego: 0 0 20px rgba(255,90,31,0.3);
+    --glow-dorado: 0 0 20px rgba(246,216,154,0.3);
+    --sombra-boton: 0 4px 0 #7a2a00;
+}
+
+/* ----- GLOBAL ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background: radial-gradient(circle at 10% 20%, #1a0b0b, #0d0505);
-    font-family: 'Georgia', 'Times New Roman', 'Segoe UI', serif;
+    background: radial-gradient(circle at 20% 30%, #1a0a06 0%, #050202 100%);
+    font-family: 'Inter', sans-serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
     padding: 20px;
-    color: #f0e2c5;
-    /* Textura sutil de pergamino antiguo */
-    background-image: 
-        repeating-linear-gradient(45deg, rgba(255, 77, 0, 0.03) 0px, rgba(255, 77, 0, 0.03) 2px, transparent 2px, transparent 8px),
-        radial-gradient(circle at 20% 30%, rgba(255, 100, 0, 0.08) 0%, transparent 50%);
+    color: #fff6ed;
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* ----- CONTENEDOR PRINCIPAL ----- */
+/* ===== ELEMENTOS DECORATIVOS ===== */
+
+.logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: 0 0 30px rgba(246,216,154,0.8), 0 0 70px rgba(255,90,31,0.5);
+    border: 2px solid rgba(246,216,154,0.7);
+    transition: all 0.3s ease;
+}
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.particulas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+.particula {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,242,201,.9);
+    box-shadow: 0 0 18px rgba(255,235,165,.9);
+    animation: brillo 5s ease-in-out infinite;
+}
+.particula:nth-child(1){top:12%;left:31%}
+.particula:nth-child(2){top:18%;left:66%;animation-delay:1s}
+.particula:nth-child(3){top:46%;left:55%;animation-delay:2s}
+.particula:nth-child(4){top:57%;left:23%;animation-delay:1.5s}
+.particula:nth-child(5){top:70%;left:82%;animation-delay:2.5s}
+.particula:nth-child(6){top:85%;left:45%;animation-delay:3s}
+.particula:nth-child(7){top:33%;left:88%;animation-delay:0.8s}
+.particula:nth-child(8){top:92%;left:15%;animation-delay:2.2s}
+
+.hojas-flotantes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+.hoja-float {
+    position: absolute;
+    width: 28px;
+    height: 14px;
+    border-radius: 50% 50% 50% 10%;
+    background: linear-gradient(145deg, #c4ff6d, #679d29);
+    opacity: .7;
+    box-shadow: 0 0 15px rgba(177,255,91,.4);
+    animation: caer 12s linear infinite;
+}
+.hoja-float:nth-child(1){top:19%;left:6%}
+.hoja-float:nth-child(2){top:24%;left:8%;animation-delay:2s}
+.hoja-float:nth-child(3){top:29%;left:11%;animation-delay:4s}
+.hoja-float:nth-child(4){top:34%;left:5%;animation-delay:1s}
+.hoja-float:nth-child(5){top:22%;left:88%;animation-delay:3s}
+.hoja-float:nth-child(6){top:45%;left:92%;animation-delay:5s}
+.hoja-float:nth-child(7){top:68%;left:3%;animation-delay:2.5s}
+.hoja-float:nth-child(8){top:55%;left:94%;animation-delay:4.5s}
+
+.alas-dragon {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    pointer-events: none;
+    z-index: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.ala {
+    width: 32%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(255,80,40,0.25), transparent 70%);
+    clip-path: polygon(0 100%, 20% 60%, 35% 70%, 50% 40%, 65% 65%, 80% 50%, 100% 100%);
+    opacity: .4;
+    filter: blur(3px);
+    animation: latirAla 4s ease-in-out infinite alternate;
+}
+.ala.derecha {
+    transform: scaleX(-1);
+    animation-delay: 0.5s;
+}
+
+.brasas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+.brasa {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffd7a8 0%, #ff7a2f 55%, rgba(255,90,30,0) 72%);
+    box-shadow: 0 0 18px rgba(255,100,40,0.8);
+    opacity: 0.9;
+    animation: subirBrasa linear infinite;
+}
+.brasa:nth-child(1){left:8%;bottom:5%;animation-duration:8s;animation-delay:0s}
+.brasa:nth-child(2){left:18%;bottom:12%;animation-duration:11s;animation-delay:1s}
+.brasa:nth-child(3){left:28%;bottom:8%;animation-duration:9s;animation-delay:2s}
+.brasa:nth-child(4){left:38%;bottom:15%;animation-duration:10s;animation-delay:1.5s}
+.brasa:nth-child(5){left:48%;bottom:5%;animation-duration:12s;animation-delay:2.5s}
+.brasa:nth-child(6){left:58%;bottom:10%;animation-duration:9s;animation-delay:3s}
+.brasa:nth-child(7){left:68%;bottom:7%;animation-duration:11s;animation-delay:1.8s}
+.brasa:nth-child(8){left:78%;bottom:14%;animation-duration:10s;animation-delay:2.2s}
+.brasa:nth-child(9){left:88%;bottom:8%;animation-duration:8.5s;animation-delay:3.5s}
+.brasa:nth-child(10){left:95%;bottom:3%;animation-duration:12s;animation-delay:0.5s}
+.brasa:nth-child(11){left:15%;bottom:20%;animation-duration:10s;animation-delay:4s}
+.brasa:nth-child(12){left:45%;bottom:25%;animation-duration:9s;animation-delay:3.2s}
+.brasa:nth-child(13){left:72%;bottom:18%;animation-duration:11s;animation-delay:2.8s}
+.brasa:nth-child(14){left:55%;bottom:32%;animation-duration:10s;animation-delay:1.2s}
+.brasa:nth-child(15){left:85%;bottom:28%;animation-duration:9.5s;animation-delay:4.2s}
+
+/* ===== RUNAS FLOTANTES CON BRILLO ===== */
+.runas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+.runa {
+    position: absolute;
+    font-size: 3rem;
+    color: rgba(246, 216, 154, 0.15);
+    text-shadow: 0 0 15px rgba(246, 216, 154, 0.4), 0 0 30px rgba(255, 90, 31, 0.3);
+    animation: brilloRuna 8s ease-in-out infinite;
+    font-family: 'Cinzel', serif;
+}
+.runa:nth-child(1){top:8%;left:10%;animation-delay:0s;font-size:2.5rem}
+.runa:nth-child(2){top:15%;left:75%;animation-delay:1s;font-size:3.5rem}
+.runa:nth-child(3){top:25%;left:45%;animation-delay:2s;font-size:2rem}
+.runa:nth-child(4){top:40%;left:85%;animation-delay:3s;font-size:4rem}
+.runa:nth-child(5){top:55%;left:15%;animation-delay:4s;font-size:2.8rem}
+.runa:nth-child(6){top:70%;left:60%;animation-delay:5s;font-size:3.2rem}
+.runa:nth-child(7){top:80%;left:30%;animation-delay:6s;font-size:2.2rem}
+.runa:nth-child(8){top:90%;left:80%;animation-delay:7s;font-size:3rem}
+.runa:nth-child(9){top:5%;left:50%;animation-delay:1.5s;font-size:2.6rem}
+.runa:nth-child(10){top:35%;left:25%;animation-delay:3.5s;font-size:3.8rem}
+.runa:nth-child(11){top:65%;left:90%;animation-delay:5.5s;font-size:2.4rem}
+.runa:nth-child(12){top:85%;left:5%;animation-delay:6.5s;font-size:3.3rem}
+
+@keyframes brilloRuna {
+    0%, 100% { opacity: 0.1; text-shadow: 0 0 10px rgba(246, 216, 154, 0.3), 0 0 20px rgba(255, 90, 31, 0.2); }
+    50% { opacity: 0.35; text-shadow: 0 0 25px rgba(246, 216, 154, 0.7), 0 0 45px rgba(255, 90, 31, 0.5); }
+}
+
+/* ===== DRAGONES ASCII ===== */
+.dragon-ascii {
+    position: fixed;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.dragon-ascii pre {
+    color: #f6d89a;
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    white-space: pre;
+    text-shadow: 0 0 15px #ff7a2f, 0 0 8px #ff4d00;
+}
+
+/* Dragón original (abajo derecha) */
+.dragon-original {
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.65;
+    animation: brilloDragonOriginal 3s ease-in-out infinite alternate;
+}
+.dragon-original pre {
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+/* Dragón superior nuevo (arriba izquierda) */
+.dragon-superior {
+    top: 10px;
+    left: 10px;
+    opacity: 0.6;
+    animation: brilloDragonSuperior 4s ease-in-out infinite alternate;
+}
+.dragon-superior pre {
+    font-size: 0.65rem;
+    line-height: 1.1;
+}
+
+/* Animaciones de brillo */
+@keyframes brilloDragonOriginal {
+    0% { opacity: 0.4; text-shadow: 0 0 5px #ff7a2f, 0 0 2px #ff4d00; }
+    100% { opacity: 0.9; text-shadow: 0 0 22px #ffb36b, 0 0 12px #ff5a1f; }
+}
+
+@keyframes brilloDragonSuperior {
+    0% { opacity: 0.35; text-shadow: 0 0 8px #ff7a2f, 0 0 4px #ff4d00; }
+    100% { opacity: 0.85; text-shadow: 0 0 28px #ffb36b, 0 0 15px #ff5a1f; }
+}
+
+/* ===== ANIMACIONES GENERALES ===== */
+@keyframes brillo {
+    0%,100%{opacity:0.4;transform:scale(0.8)}
+    50%{opacity:1;transform:scale(1.3)}
+}
+@keyframes caer {
+    0%{transform:translate(0,0) rotate(0); opacity: 0.8}
+    100%{transform:translate(80px, 280px) rotate(380deg); opacity: 0}
+}
+@keyframes subirBrasa {
+    0%{transform:translateY(0) translateX(0) scale(0.6); opacity: 0;}
+    15%{opacity: 0.9;}
+    85%{opacity: 0.8;}
+    100%{transform:translateY(-380px) translateX(35px) scale(1.2); opacity: 0;}
+}
+@keyframes latirAla {
+    0% { transform: scaleX(1) scaleY(1); opacity: 0.4; }
+    100% { transform: scaleX(1.05) scaleY(1.03); opacity: 0.7; }
+}
+
+/* ===== CONTENEDOR DEL FORMULARIO ===== */
 .container {
+    position: relative;
+    z-index: 10;
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
 }
 
-/* ----- TARJETA MÁGICA (estilo pergamino de dragón) ----- */
 .formulario-card {
-    background: rgba(20, 10, 8, 0.85);
-    backdrop-filter: blur(3px);
-    border: 2px solid;
-    border-image: linear-gradient(135deg, #ff4d00, #7a2a00, #ff4d00) 1;
-    border-radius: 24px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(246, 216, 154, 0.25);
+    border-radius: 20px;
     padding: 2rem;
-    box-shadow: 
-        0 0 30px rgba(255, 77, 0, 0.2),
-        inset 0 0 20px rgba(255, 77, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-
 .formulario-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 45px rgba(255, 77, 0, 0.3);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
 }
 
-/* ----- TÍTULO ÉPICO (con runas y fuego) ----- */
 .formulario-card h2 {
+    font-family: 'Cinzel', serif;
     text-align: center;
-    color: #ff8c42;
-    font-size: 1.8rem;
+    font-size: 1.9rem;
     margin-bottom: 1.8rem;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    text-shadow: 3px 3px 0px #3a1a00;
+    background: linear-gradient(135deg, #fff8ef, #f6d89a, #ffa55a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
     letter-spacing: 3px;
-    border-bottom: 2px solid #ff4d00;
+    border-bottom: 2px solid rgba(246,216,154,0.4);
     display: inline-block;
     width: auto;
     padding-bottom: 10px;
-    background: linear-gradient(135deg, #ffaa66, #ff4d00);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: none;
 }
 
-/* Si quieres color sólido en lugar de gradiente, usa esta línea en vez de la anterior */
-/* .formulario-card h2 { color: #ff8c42; text-shadow: 2px 2px 0 #3a1a00; } */
-
-/* ----- CAMPOS DEL FORMULARIO ----- */
 .campo {
     margin-bottom: 1.5rem;
 }
-
 .campo label {
     display: block;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 8px;
-    color: #ffb347;
-    font-family: 'Georgia', serif;
-    letter-spacing: 1px;
-    font-size: 0.95rem;
+    color: var(--dorado);
+    font-family: 'Cinzel', serif;
     text-transform: uppercase;
+    font-size: 0.85rem;
 }
-
-/* Iconos decorativos en los labels (opcional, se añaden en HTML) */
-.campo label::before {
-    content: "✦ ";
-    color: #ff4d00;
-    font-size: 0.9rem;
-}
-
-/* ----- INPUTS ESTILO PERGAMINO OSCURO ----- */
-.campo input,
-.campo select,
-.campo textarea {
+.campo input, .campo select, .campo textarea {
     width: 100%;
-    padding: 12px 15px;
-    background: #2a1a12;
-    border: 1px solid #b87c4f;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
     border-radius: 12px;
-    color: #fce6cf;
-    font-size: 1rem;
-    font-family: 'Georgia', 'Times New Roman', monospace;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
+    color: #fff0e2;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s;
 }
-
-.campo input:focus,
-.campo select:focus,
-.campo textarea:focus {
+.campo input:focus, .campo select:focus, .campo textarea:focus {
     outline: none;
-    border-color: #ff4d00;
-    box-shadow: 0 0 12px rgba(255, 77, 0, 0.4);
-    background: #331e14;
+    border-color: var(--lava);
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0 0 0 3px rgba(255,90,31,0.2);
 }
-
 .campo textarea {
     resize: vertical;
     min-height: 100px;
 }
 
-/* Placeholder con estilo */
-.campo input::placeholder,
-.campo textarea::placeholder {
-    color: #8a6a4a;
-    font-style: italic;
+/* ===== INPUT DE CANTIDAD - FLECHAS PERSONALIZADAS ===== */
+#cantidad::-webkit-inner-spin-button,
+#cantidad::-webkit-outer-spin-button {
+    -webkit-appearance: inner-spin-button !important;
+    opacity: 1 !important;
+    height: 25px;
+    width: 28px;
+    cursor: pointer;
+    background: linear-gradient(180deg, rgba(255, 122, 47, 0.4), rgba(182, 58, 27, 0.6));
+    border-left: 2px solid rgba(246, 216, 154, 0.5);
+    border-radius: 0;
+    transition: all 0.3s ease;
 }
 
-/* ----- BOTONES CON FUEGO LEGENDARIO ----- */
-.botones {
-    display: flex;
-    gap: 1.2rem;
-    justify-content: center;
-    margin-top: 1.5rem;
+#cantidad::-webkit-inner-spin-button:hover,
+#cantidad::-webkit-outer-spin-button:hover {
+    background: linear-gradient(180deg, rgba(255, 122, 47, 0.7), rgba(182, 58, 27, 0.9));
+    box-shadow: 0 0 10px rgba(255, 90, 31, 0.4);
 }
 
-.botones button {
-    padding: 10px 28px;
-    font-size: 1rem;
+#btnEnviar, #btnLimpiarFormulario {
+    padding: 12px 32px;
     font-weight: bold;
     border: none;
     border-radius: 40px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Georgia', serif;
-    letter-spacing: 1px;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    box-shadow: var(--sombra-boton);
 }
-
-/* Botón Registrar (estilo fuego) */
 #btnEnviar {
-    background: linear-gradient(45deg, #ff4d00, #b82b00);
+    background: linear-gradient(145deg, #ff7a2f, #b63a1b);
     color: white;
-    box-shadow: 0 4px 12px rgba(255, 77, 0, 0.3);
-    border: 1px solid rgba(255, 150, 50, 0.6);
+    border: 1px solid rgba(246,216,154,0.5);
 }
-
 #btnEnviar:hover {
-    background: linear-gradient(45deg, #ff6622, #cc3300);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 77, 0, 0.5);
-}
-
-/* Botón Limpiar (estilo acero sombrío) */
-#btnLimpiar {
-    background: linear-gradient(45deg, #3a2a20, #2a1a10);
-    color: #d4b88c;
-    border: 1px solid #7a5a3a;
-}
-
-#btnLimpiar:hover {
-    background: linear-gradient(45deg, #4a3a2a, #3a2a1a);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 0 #7a2a00;
+}
+#btnLimpiarFormulario {
+    background: rgba(255,255,255,0.08);
+    color: #ffd7a8;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+#btnLimpiarFormulario:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #7a2a00;
+    background: rgba(255,255,255,0.18);
+}
+.botones {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-top: 1.8rem;
 }
 
-/* ----- MENSAJE DE ERROR ÉPICO ----- */
+/* ===== BOTÓN "ELEGIR PRODUCTO" (ABRE EL CARRUSEL) ===== */
+#btnAbrirCarrusel {
+    background: linear-gradient(145deg, #2a1a0a, #1a0a06);
+    color: var(--dorado);
+    border: 2px solid rgba(246, 216, 154, 0.5);
+    border-radius: 40px;
+    padding: 12px 24px;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(246, 216, 154, 0.2), inset 0 0 10px rgba(255, 90, 31, 0.1);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#btnAbrirCarrusel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(246, 216, 154, 0.15), transparent);
+    transition: left 0.5s ease;
+}
+
+#btnAbrirCarrusel:hover {
+    background: linear-gradient(145deg, #3a2a1a, #2a1a0a);
+    border-color: var(--dorado);
+    box-shadow: 0 0 25px rgba(246, 216, 154, 0.4), 0 0 40px rgba(255, 90, 31, 0.2), inset 0 0 15px rgba(255, 90, 31, 0.15);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+#btnAbrirCarrusel:hover::before {
+    left: 100%;
+}
+
+#btnAbrirCarrusel:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 10px rgba(246, 216, 154, 0.2);
+}
+
 #mensajeError {
     text-align: center;
     margin-top: 20px;
     padding: 10px;
-    font-weight: bold;
-    color: #ff7b5c;
-    background: rgba(0, 0, 0, 0.5);
+    color: #ffb36b;
+    background: rgba(0,0,0,0.5);
     border-radius: 12px;
-    font-family: monospace;
-    letter-spacing: 0.5px;
+    font-family: 'Cinzel', serif;
 }
 
-/* ----- LISTA DE DRAGONES (como pergamino de registro) ----- */
+/* ===== LISTA DE PEDIDOS ===== */
 .lista {
     margin-top: 30px;
-    background: rgba(10, 5, 3, 0.7);
-    backdrop-filter: blur(2px);
-    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(246, 216, 154, 0.25);
     border-radius: 20px;
-    border: 1px solid rgba(255, 77, 0, 0.3);
+    padding: 1.5rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+.lista.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.lista h3 {
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #fff8ef, #f6d89a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1.5rem;
 }
 
-.lista h3 {
+/* ===== PEDIDOS COMO CARDS INDEPENDIENTES ===== */
+#listaPedidos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+}
+
+#listaPedidos li {
+    background: linear-gradient(145deg, rgba(20, 10, 5, 0.9), rgba(40, 20, 10, 0.95));
+    border: 1px solid rgba(246, 216, 154, 0.3);
+    border-left: 4px solid var(--lava);
+    border-radius: 16px;
+    padding: 1.2rem;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 90, 31, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+#listaPedidos li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(246, 216, 154, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+#listaPedidos li::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 90, 31, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#listaPedidos li:hover {
+    transform: translateX(8px) scale(1.02);
+    border-left: 4px solid var(--dorado);
+    border-color: rgba(246, 216, 154, 0.5);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 90, 31, 0.2);
+    background: linear-gradient(145deg, rgba(30, 15, 8, 0.95), rgba(50, 25, 12, 0.98));
+}
+
+#listaPedidos li p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+}
+
+#listaPedidos li p:first-child {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--dorado);
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px rgba(246, 216, 154, 0.3);
+}
+
+.btnEliminar {
+    margin-top: 10px;
+    padding: 6px 16px;
+    background: rgba(182,58,27,0.7);
+    border: none;
+    border-radius: 30px;
+    color: #ffe0b5;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    box-shadow: var(--sombra-boton);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+.btnEliminar:hover {
+    transform: translateY(-2px);
+    background: #b63a1b;
+    box-shadow: 0 6px 0 #7a2a00, 0 0 15px rgba(255, 90, 31, 0.4);
+}
+
+.total-pedidos {
+    margin-top: 1.5rem;
+    padding: 1rem;
     text-align: center;
-    color: #ffb347;
-    margin-bottom: 1rem;
-    font-family: 'Georgia', serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(246, 216, 154, 0.3);
+    font-family: 'Cinzel', serif;
+    color: var(--dorado);
     font-size: 1.2rem;
 }
 
-/* Cada dragón registrado como una carta */
-#listaDragones li {
-    background: rgba(30, 18, 12, 0.8);
-    margin: 12px 0;
-    padding: 12px 15px;
-    border-radius: 16px;
-    border-left: 5px solid #ff4d00;
-    list-style: none;
-    transition: all 0.2s ease;
-}
-
-#listaDragones li:hover {
-    background: rgba(40, 25, 18, 0.9);
-    transform: translateX(5px);
-}
-
-/* Textos dentro de cada dragón */
-#listaDragones li p {
-    margin: 6px 0;
-    color: #f0ddc5;
-    font-size: 0.9rem;
-}
-
-/* Botón eliminar (estigma de banición) */
-.btnEliminar {
-    margin-top: 8px;
-    padding: 6px 14px;
-    background: #8b2a1a;
+#btnArriba {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--naranja-fuego);
+    color: white;
     border: none;
-    border-radius: 20px;
-    color: #ffe0b5;
     cursor: pointer;
+    box-shadow: var(--sombra-boton);
+    transition: 0.2s;
+    z-index: 1000;
+    display: none;
+    font-size: 28px;
     font-weight: bold;
+}
+#btnArriba:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #7a2a00;
+}
+
+*:focus-visible {
+    outline: 3px dashed var(--dorado) !important;
+    outline-offset: 4px;
+    border-radius: 12px;
+}
+
+@media (max-width: 991.98px) {
+    .formulario-card h2 { font-size: 1.5rem; }
+}
+@media (max-width: 767.98px) {
+    .formulario-card { padding: 1.2rem; }
+    .botones { flex-direction: column; gap: 0.8rem; }
+    .botones button { width: 100%; }
+    .formulario-card h2 { font-size: 1.3rem; }
+    .lista h3 { font-size: 1.4rem; }
+    .logo { width: 50px; height: 50px; top: 10px; left: 10px; }
+    .dragon-original { bottom: 5px; right: 5px; opacity: 0.45; }
+    .dragon-original pre { font-size: 0.45rem; }
+    .dragon-superior { top: 5px; left: 5px; opacity: 0.4; }
+    .dragon-superior pre { font-size: 0.35rem; }
+}
+
+/* ===== CARROUSEL FLOTANTE (IZQUIERDA) ===== */
+.carrusel-flotante {
+    position: fixed;
+    top: 50%;
+    left: -450px;
+    transform: translateY(-50%);
+    width: 85%;
+    max-width: 380px;
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(16px);
+    border: 2px solid rgba(246,216,154,0.5);
+    border-radius: 24px;
+    padding: 20px;
+    z-index: 2000;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8), 0 0 20px rgba(255,90,31,0.5);
+    transition: left 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    display: block;
+}
+
+.carrusel-flotante.abierto {
+    left: 20px;
+}
+
+.carrusel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(246,216,154,0.3);
+    padding-bottom: 10px;
+}
+
+.carrusel-header h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--dorado);
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.btn-cerrar {
+    background: none;
+    border: none;
+    color: #ffb36b;
+    font-size: 24px;
+    cursor: pointer;
     transition: all 0.2s;
-    font-family: monospace;
 }
 
-.btnEliminar:hover {
-    background: #c04020;
-    transform: scale(1.02);
-    box-shadow: 0 0 8px #ff4d00;
+.btn-cerrar:hover {
+    color: #ff4d00;
+    transform: scale(1.1);
 }
 
-/* Mensaje cuando no hay dragones */
-#listaDragones li:first-child:only-child {
+.carrusel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.carrusel-pista {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.carrusel-item {
+    min-width: 100%;
+    flex: 0 0 100%;
     text-align: center;
-    font-style: italic;
-    color: #b88866;
-    border-left-color: #665533;
+    padding: 10px;
 }
 
-/* ----- RESPONSIVE (como tu landing) ----- */
+.carrusel-item img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #1a0a06;
+    padding: 10px;
+}
+
+.carrusel-item h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    margin: 10px 0 5px;
+    color: #fff;
+}
+
+.carrusel-item p {
+    font-size: 0.8rem;
+    color: #ddd;
+    margin-bottom: 8px;
+}
+
+.carrusel-item .precio {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--dorado);
+    margin: 8px 0;
+}
+
+.btn-seleccionar-producto {
+    background: linear-gradient(145deg, #ff7a2f, #b63a1b);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 40px;
+    color: white;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+    box-shadow: 0 4px 0 #7a2a00;
+}
+
+.btn-seleccionar-producto:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #7a2a00;
+}
+
+.carrusel-prev, .carrusel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.7);
+    border: 1px solid var(--dorado);
+    color: white;
+    font-size: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carrusel-prev { left: 10px; }
+.carrusel-next { right: 10px; }
+
+.carrusel-indicadores {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.carrusel-indicador {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: none;
+    cursor: pointer;
+}
+
+.carrusel-indicador.activo {
+    background: var(--dorado);
+    box-shadow: 0 0 8px var(--dorado);
+}
+
 @media (max-width: 600px) {
-    .formulario-card {
-        padding: 1.2rem;
+    .carrusel-flotante {
+        width: 95%;
+        max-width: none;
+        padding: 15px;
     }
-    
-    .botones {
-        flex-direction: column;
-        gap: 0.8rem;
+    .carrusel-flotante.abierto {
+        left: 10px;
     }
-    
-    .botones button {
-        width: 100%;
-    }
-    
-    .formulario-card h2 {
-        font-size: 1.3rem;
+    .carrusel-item img {
+        max-height: 150px;
     }
 }
