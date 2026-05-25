@@ -27,8 +27,61 @@ const formulario = document.getElementById('formularioVentas');
 
 // Expresiones regulares para validación
 const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const regexRut = /^[0-9]{1,2}\.[0-9]{3}\.[0-9]{3}-[0-9kK]{1}$/;
 const regexTelefono = /^(\+?56)?\s?9\s?[0-9]{4}\s?[0-9]{4}$/;
+
+// ========== VALIDACIÓN DE RUT CHILENO ==========
+function validarRut(rut) {
+    // Limpiar el RUT: eliminar puntos, guión y espacios
+    let rutLimpio = rut.replace(/\./g, '').replace(/-/g, '').replace(/\s/g, '');
+    
+    // Verificar que tenga al menos 2 caracteres (número + dígito verificador)
+    if (rutLimpio.length < 2) return false;
+    
+    // Separar número del dígito verificador
+    const dv = rutLimpio.slice(-1).toUpperCase();
+    const numero = rutLimpio.slice(0, -1);
+    
+    // Verificar que el número sea numérico
+    if (!/^\d+$/.test(numero)) return false;
+    
+    // Verificar que el dígito verificador sea válido (0-9 o K)
+    if (!/^[0-9K]$/.test(dv)) return false;
+    
+    // Calcular dígito verificador
+    let suma = 0;
+    let multiplo = 2;
+    
+    for (let i = numero.length - 1; i >= 0; i--) {
+        suma += parseInt(numero[i]) * multiplo;
+        multiplo = multiplo === 7 ? 2 : multiplo + 1;
+    }
+    
+    const resto = suma % 11;
+    const dvCalculado = resto === 0 ? '0' : resto === 1 ? 'K' : (11 - resto).toString();
+    
+    return dv === dvCalculado;
+}
+
+function formatearRut(rut) {
+    // Limpiar y formatear a XX.XXX.XXX-X
+    let rutLimpio = rut.replace(/\./g, '').replace(/-/g, '').replace(/\s/g, '');
+    const dv = rutLimpio.slice(-1).toUpperCase();
+    const numero = rutLimpio.slice(0, -1);
+    
+    // Formatear con puntos
+    let numeroFormateado = '';
+    let contador = 0;
+    for (let i = numero.length - 1; i >= 0; i--) {
+        numeroFormateado = numero[i] + numeroFormateado;
+        contador++;
+        if (contador === 3 && i > 0) {
+            numeroFormateado = '.' + numeroFormateado;
+            contador = 0;
+        }
+    }
+    
+    return numeroFormateado + '-' + dv;
+}
 
 // ========== CARRUSEL FLOTANTE ==========
 const productosCatalogo = [
@@ -168,8 +221,8 @@ function validarFormulario(nombre, apellido, rut, correo, telefono, direccion, p
         mostrarMensaje('El apellido debe tener al menos 3 caracteres.');
         return false;
     }
-    if (!regexRut.test(rut)) {
-        mostrarMensaje('El RUT no tiene un formato válido (Ej: 12.345.678-9).');
+    if (!validarRut(rut)) {
+        mostrarMensaje('El RUT ingresado no es válido. Verifica el número y dígito verificador.');
         return false;
     }
     if (!regexCorreo.test(correo)) {
@@ -295,7 +348,8 @@ function procesarFormulario(event) {
     limpiarMensaje();
     const nombre = sanitizarTexto(inputNombre.value);
     const apellido = sanitizarTexto(inputApellido.value);
-    const rut = sanitizarTexto(inputRut.value);
+    const rutOriginal = sanitizarTexto(inputRut.value);
+    const rut = formatearRut(rutOriginal); // Formatear RUT automáticamente
     const correo = sanitizarTexto(inputCorreo.value);
     const telefono = sanitizarTexto(inputTelefono.value);
     const direccion = sanitizarTexto(inputDireccion.value);
@@ -304,13 +358,22 @@ function procesarFormulario(event) {
     const precioTexto = inputPrecio.value;
     const precioNumerico = parseInt(precioTexto.replace(/\D/g, '')) || 0;
     const total = precioNumerico * cantidad;
-    if (!validarFormulario(nombre, apellido, rut, correo, telefono, direccion, producto, cantidad)) return;
+    
+    if (!validarFormulario(nombre, apellido, rutOriginal, correo, telefono, direccion, producto, cantidad)) return;
+    
     const nuevoPedido = crearPedido(nombre, apellido, rut, correo, telefono, direccion, producto, cantidad, total);
     agregarPedido(nuevoPedido);
     renderizarLista();
     limpiarCamposFormulario();
     mostrarMensaje(`✨ ¡Pedido de ${producto} realizado con éxito! ✨`, false);
 }
+
+// Formatear RUT mientras se escribe
+inputRut.addEventListener('blur', function() {
+    if (this.value.trim() !== '' && validarRut(this.value)) {
+        this.value = formatearRut(this.value);
+    }
+});
 
 inputCantidad.addEventListener('input', actualizarPrecioYTotal);
 formulario.addEventListener('submit', procesarFormulario);
