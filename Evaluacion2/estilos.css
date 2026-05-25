@@ -1,7 +1,7 @@
 /* =============================================
    REGISTRO DE DRAGONES - ESTILO MUNDO DRAGÓN
    Incluye: fondo épico, partículas, hojas, alas, brasas, runas brillantes, dos dragones ASCII
-   VERSIÓN RESPONSIVE MEJORADA
+   VERSIÓN RESPONSIVE MEJORADA CON CAMPOS NUEVOS
    ============================================= */
 
 :root {
@@ -170,39 +170,6 @@ body {
 .brasa:nth-child(14){left:55%;bottom:32%;animation-duration:10s;animation-delay:1.2s}
 .brasa:nth-child(15){left:85%;bottom:28%;animation-duration:9.5s;animation-delay:4.2s}
 
-/* ===== RUNAS FLOTANTES CON BRILLO ===== */
-.runas {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-}
-.runa {
-    position: absolute;
-    font-size: 3rem;
-    color: rgba(246, 216, 154, 0.15);
-    text-shadow: 0 0 15px rgba(246, 216, 154, 0.4), 0 0 30px rgba(255, 90, 31, 0.3);
-    animation: brilloRuna 8s ease-in-out infinite;
-    font-family: 'Cinzel', serif;
-}
-.runa:nth-child(1){top:8%;left:10%;animation-delay:0s;font-size:2.5rem}
-.runa:nth-child(2){top:15%;left:75%;animation-delay:1s;font-size:3.5rem}
-.runa:nth-child(3){top:25%;left:45%;animation-delay:2s;font-size:2rem}
-.runa:nth-child(4){top:40%;left:85%;animation-delay:3s;font-size:4rem}
-.runa:nth-child(5){top:55%;left:15%;animation-delay:4s;font-size:2.8rem}
-.runa:nth-child(6){top:70%;left:60%;animation-delay:5s;font-size:3.2rem}
-.runa:nth-child(7){top:80%;left:30%;animation-delay:6s;font-size:2.2rem}
-.runa:nth-child(8){top:90%;left:80%;animation-delay:7s;font-size:3rem}
-.runa:nth-child(9){top:5%;left:50%;animation-delay:1.5s;font-size:2.6rem}
-.runa:nth-child(10){top:35%;left:25%;animation-delay:3.5s;font-size:3.8rem}
-.runa:nth-child(11){top:65%;left:90%;animation-delay:5.5s;font-size:2.4rem}
-.runa:nth-child(12){top:85%;left:5%;animation-delay:6.5s;font-size:3.3rem}
-
-@keyframes brilloRuna {
-    0%, 100% { opacity: 0.1; text-shadow: 0 0 10px rgba(246, 216, 154, 0.3), 0 0 20px rgba(255, 90, 31, 0.2); }
-    50% { opacity: 0.35; text-shadow: 0 0 25px rgba(246, 216, 154, 0.7), 0 0 45px rgba(255, 90, 31, 0.5); }
-}
-
 /* ===== DRAGONES ASCII ===== */
 .dragon-ascii {
     position: fixed;
@@ -352,6 +319,15 @@ body {
 .campo textarea {
     resize: vertical;
     min-height: 100px;
+}
+
+/* ===== CAMPOS EN 2 COLUMNAS (PANTALLAS GRANDES) ===== */
+@media (min-width: 768px) {
+    .campos-fila {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
 }
 
 /* ===== INPUT DE CANTIDAD - FLECHAS PERSONALIZADAS ===== */
@@ -950,9 +926,6 @@ body {
     }
     .dragon-superior pre {
         font-size: 0.35rem;
-    }
-    .runa {
-        font-size: 1.5rem !important;
     }
 }
 
