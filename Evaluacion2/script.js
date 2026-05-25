@@ -1,16 +1,19 @@
 // =============================================
 // TIENDA DE TESOROS DRACÓNICOS - APP PRINCIPAL
-// Gestión de pedidos: nombre, correo, producto, cantidad, total
-// + Carrusel flotante lateral para seleccionar productos
+// Gestión de pedidos con localStorage, validación completa
 // =============================================
 
-// Arreglo principal de pedidos
-const pedidos = [];
+// Arreglo principal de pedidos (cargar desde localStorage al iniciar)
+const pedidos = JSON.parse(localStorage.getItem('pedidosDragon')) || [];
 
 // Referencias al DOM
 const container = document.querySelector('.container');
 const inputNombre = document.getElementById('nombre');
+const inputApellido = document.getElementById('apellido');
+const inputRut = document.getElementById('rut');
 const inputCorreo = document.getElementById('correo');
+const inputTelefono = document.getElementById('telefono');
+const inputDireccion = document.getElementById('direccion');
 const inputProducto = document.getElementById('producto');
 const inputPrecio = document.getElementById('precio');
 const inputCantidad = document.getElementById('cantidad');
@@ -22,8 +25,10 @@ const listaPedidos = document.getElementById('listaPedidos');
 const totalPedidosDiv = document.getElementById('totalPedidos');
 const formulario = document.getElementById('formularioVentas');
 
-// Expresión regular para correo
+// Expresiones regulares para validación
 const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const regexRut = /^[0-9]{1,2}\.[0-9]{3}\.[0-9]{3}-[0-9kK]{1}$/;
+const regexTelefono = /^(\+?56)?\s?9\s?[0-9]{4}\s?[0-9]{4}$/;
 
 // ========== CARRUSEL FLOTANTE ==========
 const productosCatalogo = [
@@ -97,7 +102,7 @@ function cerrarCarrusel() {
         if (!carruselFlotante.classList.contains('abierto')) {
             carruselFlotante.style.display = 'none';
         }
-    }, 400);
+    }, 500);
 }
 
 // Eventos del carrusel
@@ -150,17 +155,33 @@ function limpiarMensaje() {
     mensajeError.textContent = '';
 }
 
-function validarFormulario(nombre, correo, producto, cantidad) {
-    if (nombre === '' || correo === '') {
-        mostrarMensaje('¡Oh, Guardián! Debes completar tu nombre y correo.');
+function validarFormulario(nombre, apellido, rut, correo, telefono, direccion, producto, cantidad) {
+    if (nombre === '' || apellido === '' || rut === '' || correo === '' || telefono === '' || direccion === '') {
+        mostrarMensaje('¡Oh, Guardián! Debes completar todos los campos obligatorios.');
         return false;
     }
     if (nombre.length < 3) {
         mostrarMensaje('El nombre debe tener al menos 3 caracteres.');
         return false;
     }
+    if (apellido.length < 3) {
+        mostrarMensaje('El apellido debe tener al menos 3 caracteres.');
+        return false;
+    }
+    if (!regexRut.test(rut)) {
+        mostrarMensaje('El RUT no tiene un formato válido (Ej: 12.345.678-9).');
+        return false;
+    }
     if (!regexCorreo.test(correo)) {
         mostrarMensaje('El correo no tiene un formato válido para el reino.');
+        return false;
+    }
+    if (!regexTelefono.test(telefono)) {
+        mostrarMensaje('El teléfono debe tener formato chileno (Ej: +56 9 1234 5678 o 9 1234 5678).');
+        return false;
+    }
+    if (direccion.length < 5) {
+        mostrarMensaje('La dirección debe tener al menos 5 caracteres.');
         return false;
     }
     if (producto === '') {
@@ -174,11 +195,15 @@ function validarFormulario(nombre, correo, producto, cantidad) {
     return true;
 }
 
-function crearPedido(nombre, correo, producto, cantidad, total) {
+function crearPedido(nombre, apellido, rut, correo, telefono, direccion, producto, cantidad, total) {
     return {
         id: Date.now(),
         nombre: nombre,
+        apellido: apellido,
+        rut: rut,
         correo: correo,
+        telefono: telefono,
+        direccion: direccion,
         producto: producto,
         cantidad: cantidad,
         total: total,
@@ -186,8 +211,13 @@ function crearPedido(nombre, correo, producto, cantidad, total) {
     };
 }
 
+function guardarEnLocalStorage() {
+    localStorage.setItem('pedidosDragon', JSON.stringify(pedidos));
+}
+
 function agregarPedido(pedido) {
     pedidos.push(pedido);
+    guardarEnLocalStorage();
 }
 
 function cancelarPedido(id) {
@@ -198,6 +228,7 @@ function cancelarPedido(id) {
     const indice = pedidos.findIndex(p => p.id === id);
     if (indice !== -1) {
         pedidos.splice(indice, 1);
+        guardarEnLocalStorage();
         renderizarLista();
         mostrarMensaje(`Pedido de ${pedido.producto} cancelado.`, false);
     }
@@ -224,8 +255,11 @@ function renderizarLista() {
     pedidos.forEach(pedido => {
         const item = document.createElement('li');
         item.innerHTML = `
-            <p>🐉 Guardián: ${pedido.nombre}</p>
+            <p>🐉 Guardián: ${pedido.nombre} ${pedido.apellido}</p>
+            <p>📜 RUT: ${pedido.rut}</p>
             <p>✉️ Correo: ${pedido.correo}</p>
+            <p>📞 Teléfono: ${pedido.telefono}</p>
+            <p>🏰 Dirección: ${pedido.direccion}</p>
             <p>🔥 Producto: ${pedido.producto}</p>
             <p>🔢 Cantidad: ${pedido.cantidad}</p>
             <p>💰 Total: $${pedido.total.toLocaleString('es-CL')}</p>
@@ -243,7 +277,11 @@ function renderizarLista() {
 
 function limpiarCamposFormulario() {
     inputNombre.value = '';
+    inputApellido.value = '';
+    inputRut.value = '';
     inputCorreo.value = '';
+    inputTelefono.value = '';
+    inputDireccion.value = '';
     inputProducto.value = '';
     inputPrecio.value = '';
     inputCantidad.value = '1';
@@ -256,14 +294,18 @@ function procesarFormulario(event) {
     event.preventDefault();
     limpiarMensaje();
     const nombre = sanitizarTexto(inputNombre.value);
+    const apellido = sanitizarTexto(inputApellido.value);
+    const rut = sanitizarTexto(inputRut.value);
     const correo = sanitizarTexto(inputCorreo.value);
+    const telefono = sanitizarTexto(inputTelefono.value);
+    const direccion = sanitizarTexto(inputDireccion.value);
     const producto = inputProducto.value;
     const cantidad = parseInt(inputCantidad.value);
     const precioTexto = inputPrecio.value;
     const precioNumerico = parseInt(precioTexto.replace(/\D/g, '')) || 0;
     const total = precioNumerico * cantidad;
-    if (!validarFormulario(nombre, correo, producto, cantidad)) return;
-    const nuevoPedido = crearPedido(nombre, correo, producto, cantidad, total);
+    if (!validarFormulario(nombre, apellido, rut, correo, telefono, direccion, producto, cantidad)) return;
+    const nuevoPedido = crearPedido(nombre, apellido, rut, correo, telefono, direccion, producto, cantidad, total);
     agregarPedido(nuevoPedido);
     renderizarLista();
     limpiarCamposFormulario();
@@ -298,3 +340,6 @@ window.addEventListener('scroll', function() {
 btnArriba.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ========== CARGAR PEDIDOS AL INICIAR ==========
+renderizarLista();
